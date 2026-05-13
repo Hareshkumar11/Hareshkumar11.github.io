@@ -58,6 +58,16 @@ a:hover { text-decoration: underline; }
   justify-content: flex-end;
 }
 
+.conference {
+  display: inline-block;
+  color: #0b5ed7;
+  background-color: #eaf2ff;
+  font-weight: 700;
+  padding: 3px 8px;
+  border-radius: 6px;
+  margin-top: 4px;
+}
+
 .nav-links a {
   font-size: 0.98rem;
   color: #314355;
