@@ -6,7 +6,37 @@
   --border: #d9e1ea;
   --bg: #ffffff;
   --sidebar-bg: #f8fafc;
+  --nav: #314355;
+  --secondary: #2f3c4a;
+  --lead: #33475b;
+  --rule: #e5edf5;
+  --section-rule: #d7e5f2;
+  --badge-border: #cddbeb;
+  --panel: #fcfdff;
+  --conference: #0b5ed7;
+  --conference-bg: #eaf2ff;
+  color-scheme: light;
   --max-width: 1180px;
+}
+
+:root[data-theme="dark"] {
+  color-scheme: dark;
+  --primary: #9dc7ff;
+  --primary-dark: #c3dcff;
+  --text: #e3eaf2;
+  --muted: #b0bfd0;
+  --border: #374858;
+  --bg: #141c25;
+  --sidebar-bg: #1b2632;
+  --nav: #d6e2ee;
+  --secondary: #c5d4e2;
+  --lead: #cbd9e7;
+  --rule: #334353;
+  --section-rule: #394d61;
+  --badge-border: #4d6278;
+  --panel: #1c2733;
+  --conference: #a9ccff;
+  --conference-bg: #263a56;
 }
 
 * { box-sizing: border-box; }
@@ -30,7 +60,7 @@ a:hover { text-decoration: underline; }
   position: sticky;
   top: 0;
   z-index: 1000;
-  background: #fff;
+  background: var(--bg);
   border-bottom: 1px solid var(--border);
 }
 
@@ -51,7 +81,27 @@ a:hover { text-decoration: underline; }
   white-space: nowrap;
 }
 
+.theme-toggle {
+  width: 44px;
+  height: 44px;
+  flex: none;
+  display: grid;
+  place-items: center;
+  padding: 0;
+  border: 1px solid var(--border);
+  border-radius: 50%;
+  background: var(--sidebar-bg);
+  color: var(--primary-dark);
+  cursor: pointer;
+}
+
+.theme-toggle:hover { border-color: var(--primary); }
+.theme-toggle:focus-visible { outline: 2px solid var(--primary); outline-offset: 2px; }
+.theme-toggle .sun, [data-theme="dark"] .theme-toggle .moon { display: none; }
+[data-theme="dark"] .theme-toggle .sun { display: inline; }
+
 .nav-links {
+  margin-left: auto;
   display: flex;
   gap: 22px;
   flex-wrap: wrap;
@@ -60,8 +110,8 @@ a:hover { text-decoration: underline; }
 
 .conference {
   display: inline-block;
-  color: #0b5ed7;
-  background-color: #eaf2ff;
+  color: var(--conference);
+  background-color: var(--conference-bg);
   font-weight: 700;
   padding: 3px 8px;
   border-radius: 6px;
@@ -70,7 +120,7 @@ a:hover { text-decoration: underline; }
 
 .nav-links a {
   font-size: 0.98rem;
-  color: #314355;
+  color: var(--nav);
 }
 
 .layout {
@@ -111,7 +161,7 @@ a:hover { text-decoration: underline; }
 .sidebar .role {
   margin: 10px 0 4px;
   font-size: 1rem;
-  color: #2f3c4a;
+  color: var(--secondary);
   font-weight: 600;
 }
 
@@ -129,7 +179,7 @@ a:hover { text-decoration: underline; }
 
 .sidebar-links li {
   padding: 8px 0;
-  border-top: 1px solid #e5edf5;
+  border-top: 1px solid var(--rule);
   font-size: 0.98rem;
 }
 
@@ -145,7 +195,7 @@ a:hover { text-decoration: underline; }
 
 .lead {
   font-size: 1.06rem;
-  color: #33475b;
+  color: var(--lead);
   margin-top: 0;
 }
 
@@ -154,7 +204,7 @@ a:hover { text-decoration: underline; }
   font-size: 1.55rem;
   margin: 34px 0 14px;
   padding-bottom: 6px;
-  border-bottom: 2px solid #d7e5f2;
+  border-bottom: 2px solid var(--section-rule);
 }
 
 .item {
@@ -175,7 +225,7 @@ a:hover { text-decoration: underline; }
 }
 
 .item-subtitle {
-  color: #2f3c4a;
+  color: var(--secondary);
 }
 
 .item-date {
@@ -205,7 +255,7 @@ ul.clean-list li { margin-bottom: 4px; }
   border: 1px solid var(--border);
   border-radius: 16px;
   padding: 18px 20px;
-  background: #fff;
+  background: var(--bg);
 }
 
 .pub-card h3 {
@@ -217,7 +267,7 @@ ul.clean-list li { margin-bottom: 4px; }
   display: inline-block;
   padding: 3px 10px;
   border-radius: 999px;
-  border: 1px solid #cddbeb;
+  border: 1px solid var(--badge-border);
   color: var(--primary-dark);
   font-size: 0.86rem;
   margin-top: 8px;
@@ -242,7 +292,7 @@ ul.clean-list li { margin-bottom: 4px; }
   border: 1px solid var(--border);
   border-radius: 16px;
   padding: 18px 20px;
-  background: #fcfdff;
+  background: var(--panel);
 }
 
 .small {
@@ -267,11 +317,16 @@ ul.clean-list li { margin-bottom: 4px; }
 @media (max-width: 640px) {
   .masthead__inner {
     padding: 10px 0;
-    align-items: flex-start;
-    flex-direction: column;
+    display: grid;
+    grid-template-columns: 1fr auto;
   }
 
+  .theme-toggle { grid-column: 2; grid-row: 1; }
+
   .nav-links {
+    grid-column: 1 / -1;
+    margin-left: 0;
+    justify-content: flex-start;
     gap: 14px;
   }
 
